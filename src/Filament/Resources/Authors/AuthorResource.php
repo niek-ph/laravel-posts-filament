@@ -18,7 +18,6 @@ use UnitEnum;
 
 class AuthorResource extends Resource
 {
-
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
     protected static ?string $recordTitleAttribute = 'name';

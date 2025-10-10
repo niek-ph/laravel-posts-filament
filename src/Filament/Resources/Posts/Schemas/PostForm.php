@@ -2,7 +2,6 @@
 
 namespace NiekPH\LaravelPostsFilament\Filament\Resources\Posts\Schemas;
 
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\MarkdownEditor;
@@ -49,9 +48,9 @@ class PostForm
                             ->label('Content')
                             ->live(onBlur: true)
                             ->columnSpan(1)
-//                            ->fileAttachmentsDisk('public')
-//                            ->fileAttachmentsDirectory('attachments')
-//                            ->fileAttachmentsVisibility('public')
+                        //                            ->fileAttachmentsDisk('public')
+                        //                            ->fileAttachmentsDirectory('attachments')
+                        //                            ->fileAttachmentsVisibility('public')
                         ,
 
                         ViewField::make('body_preview')
@@ -60,7 +59,6 @@ class PostForm
                             ->columnSpan(1),
                     ])
                     ->columnSpanFull(),
-
 
                 KeyValue::make('metadata')
                     ->columnSpanFull(),
@@ -72,14 +70,13 @@ class PostForm
             ]);
     }
 
-
     /**
      * Flatten the category tree with breadcrumb paths
      */
     private static function flattenCategoryTree($categories, $path = '', $result = [])
     {
         foreach ($categories as $category) {
-            $currentPath = $path ? $path . ' > ' . $category->name : $category->name;
+            $currentPath = $path ? $path.' > '.$category->name : $category->name;
             $result[$category->id] = $currentPath;
 
             if (isset($category->child_categories) && $category->child_categories->count() > 0) {
@@ -89,5 +86,4 @@ class PostForm
 
         return $result;
     }
-
 }

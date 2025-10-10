@@ -18,7 +18,6 @@ use UnitEnum;
 
 class PostResource extends Resource
 {
-
     protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentText;
 
     protected static ?string $recordTitleAttribute = 'title';

@@ -12,7 +12,7 @@ class EditPost extends EditRecord
 {
     protected static string $resource = PostResource::class;
 
-    protected Width | string | null $maxContentWidth = Width::Full;
+    protected Width|string|null $maxContentWidth = Width::Full;
 
     protected function getHeaderActions(): array
     {
