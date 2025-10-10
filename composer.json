@@ -1,24 +1,26 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "niek-ph/laravel-posts-filament",
+    "description": "This is my package laravel-posts-filament",
     "keywords": [
-        ":vendor_name",
+        "NiekPH",
         "laravel",
-        ":package_slug"
+        "laravel-posts-filament"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/niek-ph/laravel-posts-filament",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Niek Poorthuis",
+            "email": "niek@appcenternederland.nl",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.4",
-        "spatie/laravel-package-tools": "^1.16",
-        "illuminate/contracts": "^11.0||^12.0"
+        "php": "^8.4||^8.5",
+        "filament/filament": "^4.0",
+        "illuminate/contracts": "^11.0||^12.0",
+        "niek-ph/laravel-posts": "^0.0.1",
+        "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
@@ -30,24 +32,26 @@
         "pestphp/pest-plugin-laravel": "^4.0",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0",
-        "spatie/laravel-ray": "^1.35"
+        "phpstan/phpstan-phpunit": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "NiekPH\\LaravelPostsFilament\\": "src/",
+            "NiekPH\\LaravelPostsFilament\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "NiekPH\\LaravelPostsFilament\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "prepare": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php -r \"if (file_exists('vendor/bin/testbench')) { echo shell_exec('vendor/bin/testbench package:discover --ansi'); }\""
+        ],
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
@@ -63,10 +67,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "NiekPH\\LaravelPostsFilament\\LaravelPostsFilamentServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelPostsFilament": "NiekPH\\LaravelPostsFilament\\Facades\\LaravelPostsFilament"
             }
         }
     },
