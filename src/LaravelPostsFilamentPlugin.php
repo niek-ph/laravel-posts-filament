@@ -20,7 +20,7 @@ class LaravelPostsFilamentPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel
-            ->resources(config('laravel-posts-filament.resources'))
+            ->resources(config('posts-filament.resources'))
             ->pages([])
             ->widgets([
 
