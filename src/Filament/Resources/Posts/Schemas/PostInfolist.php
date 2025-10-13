@@ -15,7 +15,7 @@ class PostInfolist
                 TextEntry::make('title'),
                 TextEntry::make('slug'),
                 TextEntry::make('full_path'),
-                TextEntry::make('subtitle')
+                TextEntry::make('excerpt')
                     ->placeholder('-'),
                 TextEntry::make('sort_order')
                     ->numeric()

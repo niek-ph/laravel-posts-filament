@@ -11,6 +11,8 @@ use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Pages\CreateCatego
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Pages\EditCategory;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Pages\ListCategories;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Pages\ViewCategory;
+use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\RelationManagers\PostsRelationManager;
+use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\RelationManagers\SubCategoriesRelationManager;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Schemas\CategoryForm;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Schemas\CategoryInfolist;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Tables\CategoriesTable;
@@ -59,7 +61,8 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SubCategoriesRelationManager::class,
+            PostsRelationManager::class
         ];
     }
 

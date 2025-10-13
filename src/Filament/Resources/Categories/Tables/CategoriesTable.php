@@ -20,19 +20,10 @@ class CategoriesTable
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
-                TextColumn::make('full_path')
-                    ->searchable(),
-                TextColumn::make('depth')
-                    ->numeric()
-                    ->sortable(),
+
                 TextColumn::make('description')
                     ->searchable(),
-                TextColumn::make('sort_order')
-                    ->numeric()
-                    ->sortable(),
                 ImageColumn::make('featured_image'),
-                TextColumn::make('seo_title')
-                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

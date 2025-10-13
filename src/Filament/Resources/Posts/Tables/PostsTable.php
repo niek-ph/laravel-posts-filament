@@ -9,6 +9,9 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use NiekPH\LaravelPostsFilament\Filament\Resources\Authors\AuthorResource;
+use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\CategoryResource;
 
 class PostsTable
 {
@@ -16,27 +19,40 @@ class PostsTable
     {
         return $table
             ->columns([
+                ImageColumn::make('featured_image')
+                    ->toggleable(),
                 TextColumn::make('title')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
                 TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
                 TextColumn::make('full_path')
-                    ->searchable(),
-                TextColumn::make('subtitle')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
                 TextColumn::make('sort_order')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('published_at')
                     ->dateTime()
-                    ->sortable(),
-                ImageColumn::make('featured_image'),
-                TextColumn::make('seo_title')
-                    ->searchable(),
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('author.name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->url(fn(?Model $record) => AuthorResource::getUrl('view', ['record' => $record->getAttribute('author_id')]))
+                    ->color('primary'),
                 TextColumn::make('category.name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable()
+                    ->toggleable()
+                    ->url(fn(?Model $record) => CategoryResource::getUrl('view', ['record' => $record->getAttribute('category_id')]))
+                    ->color('primary'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -46,6 +62,7 @@ class PostsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('sort_order')
             ->filters([
                 //
             ])

@@ -11,6 +11,7 @@ use NiekPH\LaravelPostsFilament\Filament\Resources\Authors\Pages\CreateAuthor;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Authors\Pages\EditAuthor;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Authors\Pages\ListAuthors;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Authors\Pages\ViewAuthor;
+use NiekPH\LaravelPostsFilament\Filament\Resources\Authors\RelationManagers\PostsRelationManager;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Authors\Schemas\AuthorForm;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Authors\Schemas\AuthorInfolist;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Authors\Tables\AuthorsTable;
@@ -61,7 +62,7 @@ class AuthorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PostsRelationManager::class
         ];
     }
 

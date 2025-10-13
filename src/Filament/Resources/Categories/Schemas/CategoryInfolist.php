@@ -15,9 +15,6 @@ class CategoryInfolist
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
                 TextEntry::make('full_path'),
-                TextEntry::make('depth')
-                    ->numeric()
-                    ->placeholder('-'),
                 TextEntry::make('metadata')
                     ->placeholder('-')
                     ->columnSpanFull(),
