@@ -17,7 +17,6 @@ use NiekPH\LaravelPostsFilament\Filament\Resources\Comments\Tables\CommentsTable
 
 class CommentResource extends Resource
 {
-
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Megaphone;
 
     protected static ?string $recordTitleAttribute = 'id';
@@ -41,7 +40,6 @@ class CommentResource extends Resource
     {
         return __('posts-filament::resources.comments.plural_label');
     }
-
 
     public static function form(Schema $schema): Schema
     {

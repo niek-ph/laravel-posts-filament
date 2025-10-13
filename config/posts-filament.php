@@ -10,5 +10,5 @@ return [
         'PostResource' => \NiekPH\LaravelPostsFilament\Filament\Resources\Posts\PostResource::class,
         'TagResource' => \NiekPH\LaravelPostsFilament\Filament\Resources\Tags\TagResource::class,
         'CommentResource' => \NiekPH\LaravelPostsFilament\Filament\Resources\Comments\CommentResource::class,
-    ]
+    ],
 ];

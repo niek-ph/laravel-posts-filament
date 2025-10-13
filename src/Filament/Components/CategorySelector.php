@@ -16,6 +16,7 @@ class CategorySelector extends Select
         $this->label('Category')
             ->options(function () {
                 $categories = LaravelPosts::getCategoryTree();
+
                 return self::flattenCategoryTree($categories);
             })
             ->searchable()
@@ -25,13 +26,11 @@ class CategorySelector extends Select
                 $flattened = self::flattenCategoryTree($categories);
 
                 return collect($flattened)
-                    ->filter(fn ($label, $id) =>
-                    str_contains(strtolower($label), strtolower($search))
+                    ->filter(fn ($label, $id) => str_contains(strtolower($label), strtolower($search))
                     )
                     ->take(10)
                     ->toArray();
-            })
-        ;
+            });
     }
 
     /**
@@ -40,7 +39,7 @@ class CategorySelector extends Select
     private static function flattenCategoryTree($categories, $path = '', $result = [])
     {
         foreach ($categories as $category) {
-            $currentPath = $path ? $path . ' > ' . $category->name : $category->name;
+            $currentPath = $path ? $path.' > '.$category->name : $category->name;
             $result[$category->id] = $currentPath;
 
             if (isset($category->child_categories) && $category->child_categories->count() > 0) {
