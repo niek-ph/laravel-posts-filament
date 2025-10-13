@@ -45,13 +45,13 @@ class PostsTable
                     ->searchable()
                     ->sortable()
                     ->toggleable()
-                    ->url(fn(?Model $record) => AuthorResource::getUrl('view', ['record' => $record->getAttribute('author_id')]))
+                    ->url(fn (?Model $record) => AuthorResource::getUrl('view', ['record' => $record->getAttribute('author_id')]))
                     ->color('primary'),
                 TextColumn::make('category.name')
                     ->searchable()
                     ->sortable()
                     ->toggleable()
-                    ->url(fn(?Model $record) => CategoryResource::getUrl('view', ['record' => $record->getAttribute('category_id')]))
+                    ->url(fn (?Model $record) => CategoryResource::getUrl('view', ['record' => $record->getAttribute('category_id')]))
                     ->color('primary'),
                 TextColumn::make('created_at')
                     ->dateTime()

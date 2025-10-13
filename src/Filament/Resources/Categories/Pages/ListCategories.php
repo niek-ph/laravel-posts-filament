@@ -11,12 +11,10 @@ class ListCategories extends ListRecords
 {
     protected static string $resource = CategoryResource::class;
 
-
     public function table(Table $table): Table
     {
-        return parent::table($table)->modifyQueryUsing(fn($query) => $query->whereNull('parent_category_id'));
+        return parent::table($table)->modifyQueryUsing(fn ($query) => $query->whereNull('parent_category_id'));
     }
-
 
     protected function getHeaderActions(): array
     {

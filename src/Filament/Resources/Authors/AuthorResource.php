@@ -61,7 +61,7 @@ class AuthorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PostsRelationManager::class
+            PostsRelationManager::class,
         ];
     }
 

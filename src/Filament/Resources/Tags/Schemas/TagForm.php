@@ -18,7 +18,7 @@ class TagForm
                     ->live(debounce: 200)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
-                    ->required()
+                    ->required(),
             ]);
     }
 }

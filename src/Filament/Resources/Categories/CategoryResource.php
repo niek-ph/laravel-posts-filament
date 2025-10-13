@@ -62,7 +62,7 @@ class CategoryResource extends Resource
     {
         return [
             SubCategoriesRelationManager::class,
-            PostsRelationManager::class
+            PostsRelationManager::class,
         ];
     }
 

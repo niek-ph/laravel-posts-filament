@@ -34,12 +34,11 @@ class PostForm
                             return '';
                         }
 
-                        $fullPath = Str::beforeLast($record->full_path, '/') . '/' . $state;
+                        $fullPath = Str::beforeLast($record->full_path, '/').'/'.$state;
 
                         return Text::make($fullPath)->size('xs');
                     })
                     ->live(debounce: 200),
-
 
                 CategorySelector::make('category_id'),
 
@@ -73,25 +72,24 @@ class PostForm
                     ->columnSpanFull()
                     ->maxHeight('500px'),
                 // Grid layout for markdown editor and live preview
-//                Grid::make(2)
-//                    ->schema([
-//                        MarkdownEditor::make('body')
-//                            ->label('Content')
-//                            ->live(debounce: 200)
-//                            ->columnSpan(1)
-////                            ->fileAttachmentsDisk('public')
-////                            ->fileAttachmentsDirectory('attachments')
-////                            ->fileAttachmentsVisibility('public')
-//                        ,
-//
-//                        ViewField::make('body_preview')
-//                            ->label('Live Preview')
-//                            ->view('posts-filament::forms.markdown-preview')
-//                            ->disabled()
-//                            ->columnSpan(1),
-//                    ])
-//                    ->columnSpanFull(),
-
+                //                Grid::make(2)
+                //                    ->schema([
+                //                        MarkdownEditor::make('body')
+                //                            ->label('Content')
+                //                            ->live(debounce: 200)
+                //                            ->columnSpan(1)
+                // //                            ->fileAttachmentsDisk('public')
+                // //                            ->fileAttachmentsDirectory('attachments')
+                // //                            ->fileAttachmentsVisibility('public')
+                //                        ,
+                //
+                //                        ViewField::make('body_preview')
+                //                            ->label('Live Preview')
+                //                            ->view('posts-filament::forms.markdown-preview')
+                //                            ->disabled()
+                //                            ->columnSpan(1),
+                //                    ])
+                //                    ->columnSpanFull(),
 
                 KeyValue::make('metadata')
                     ->columnSpanFull(),
@@ -102,6 +100,4 @@ class PostForm
 
             ]);
     }
-
-
 }
