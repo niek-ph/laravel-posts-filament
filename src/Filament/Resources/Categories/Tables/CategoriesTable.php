@@ -23,7 +23,8 @@ class CategoriesTable
 
                 TextColumn::make('description')
                     ->searchable(),
-                ImageColumn::make('featured_image'),
+                ImageColumn::make('featured_image')
+                    ->disk(config('posts-filament.uploads.disk', 'public')),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

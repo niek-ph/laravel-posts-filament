@@ -30,7 +30,8 @@ class PostInfolist
                     ->placeholder('-')
                     ->columnSpanFull(),
                 ImageEntry::make('featured_image')
-                    ->placeholder('-'),
+                    ->placeholder('-')
+                    ->disk(config('posts-filament.uploads.disk', 'public')),
                 TextEntry::make('seo_title')
                     ->placeholder('-'),
                 TextEntry::make('seo_description')

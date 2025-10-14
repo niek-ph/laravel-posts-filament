@@ -15,6 +15,7 @@ class CategoryInfolist
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
                 TextEntry::make('full_path'),
+                TextEntry::make('url')->url(fn($state) => $state)->color('primary'),
                 TextEntry::make('metadata')
                     ->placeholder('-')
                     ->columnSpanFull(),
@@ -24,6 +25,7 @@ class CategoryInfolist
                     ->numeric()
                     ->placeholder('-'),
                 ImageEntry::make('featured_image')
+                    ->disk(config('posts-filament.uploads.disk', 'public'))
                     ->placeholder('-'),
                 TextEntry::make('seo_title')
                     ->placeholder('-'),

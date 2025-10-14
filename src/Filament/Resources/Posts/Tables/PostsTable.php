@@ -20,6 +20,7 @@ class PostsTable
         return $table
             ->columns([
                 ImageColumn::make('featured_image')
+                    ->disk(config('posts-filament.uploads.disk', 'public'))
                     ->toggleable(),
                 TextColumn::make('title')
                     ->searchable()

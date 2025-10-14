@@ -8,8 +8,11 @@ use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Model;
@@ -25,7 +28,6 @@ class PostForm
             ->components([
                 TextInput::make('title')
                     ->required()
-                    ->live(debounce: 200)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 TextInput::make('slug')
                     ->required()
@@ -38,15 +40,12 @@ class PostForm
 
                         return Text::make($fullPath)->size('xs');
                     })
-                    ->live(debounce: 200),
+                    ->live(debounce: 500),
 
                 CategorySelector::make('category_id'),
 
                 Select::make('author_id')
                     ->relationship('author', 'name'),
-
-                FileUpload::make('featured_image')
-                    ->image(),
 
                 TextInput::make('sort_order')
                     ->numeric(),
@@ -61,42 +60,62 @@ class PostForm
                         return TagForm::configure($schema);
                     }),
 
-                MarkdownEditor::make('excerpt')
-                    ->label('Excerpt')
-                    ->maxHeight('75px')
+                FileUpload::make('featured_image')
+                    ->image()
+                    ->imageEditor()
+                    ->visibility('public')
+                    ->disk(config('posts-filament.uploads.disk', 'public'))
+                    ->directory(config('posts-filament.uploads.directory'))
+                    ->maxSize(config('posts-filament.uploads.file_size'))
                     ->columnSpanFull(),
-
-                MarkdownEditor::make('body')
-                    ->label('Content')
-                    ->live(onBlur: true)
-                    ->columnSpanFull()
-                    ->maxHeight('500px'),
-                // Grid layout for markdown editor and live preview
-                //                Grid::make(2)
-                //                    ->schema([
-                //                        MarkdownEditor::make('body')
-                //                            ->label('Content')
-                //                            ->live(debounce: 200)
-                //                            ->columnSpan(1)
-                // //                            ->fileAttachmentsDisk('public')
-                // //                            ->fileAttachmentsDirectory('attachments')
-                // //                            ->fileAttachmentsVisibility('public')
-                //                        ,
-                //
-                //                        ViewField::make('body_preview')
-                //                            ->label('Live Preview')
-                //                            ->view('posts-filament::forms.markdown-preview')
-                //                            ->disabled()
-                //                            ->columnSpan(1),
-                //                    ])
-                //                    ->columnSpanFull(),
 
                 KeyValue::make('metadata')
                     ->columnSpanFull(),
+
                 Section::make('SEO')->schema([
                     TextInput::make('seo_title'),
                     Textarea::make('seo_description'),
-                ])->columnSpanFull(),
+                ])
+                    ->columnSpanFull(),
+
+                Section::make('Excerpt')
+                    ->schema([
+                        MarkdownEditor::make('excerpt')
+                            ->toolbarButtons([
+                                ['bold', 'italic', 'strike', 'link'],
+                                ['heading'],
+                                ['blockquote', 'bulletList', 'orderedList'],
+                                ['undo', 'redo'],
+                            ])
+                            ->hiddenLabel()
+                            ->label('Excerpt')
+                            ->maxHeight('75px')
+                            ->columnSpanFull(),
+                    ])
+                    ->columnSpanFull(),
+
+                Section::make('Content')
+                    ->schema([
+                        Grid::make()
+                            ->gridContainer()
+                            ->columnSpanFull()
+                            ->schema([
+
+                                MarkdownEditor::make('body')
+                                    ->fileAttachmentsDisk(config('posts-filament.uploads.disk', 'public'))
+                                    ->fileAttachmentsDirectory(config('posts-filament.uploads.directory'))
+                                    ->fileAttachmentsAcceptedFileTypes(config('posts-filament.uploads.mimes', ['image/png', 'image/jpeg', 'image/gif', 'image/webp']))
+                                    ->fileAttachmentsMaxSize(config('posts-filament.uploads.file_size'))
+                                    ->hiddenLabel()
+                                    ->live(debounce: 200),
+                                TextEntry::make('body_preview')
+                                    ->hiddenLabel()
+                                    ->disabled()
+                                    ->state(fn (Get $get) => $get('body'))
+                                    ->markdown(),
+
+                            ]),
+                    ])->columnSpanFull(),
 
             ]);
     }

@@ -19,4 +19,5 @@ class PostsRelationManager extends RelationManager
             ->headerActions([
             ]);
     }
+
 }

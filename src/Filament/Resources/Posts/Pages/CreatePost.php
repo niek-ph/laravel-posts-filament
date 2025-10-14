@@ -3,11 +3,12 @@
 namespace NiekPH\LaravelPostsFilament\Filament\Resources\Posts\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Support\Enums\Width;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\PostResource;
 
 class CreatePost extends CreateRecord
 {
     protected static string $resource = PostResource::class;
 
-    //    protected Width | string | null $maxContentWidth = Width::Full;
+    protected Width|string|null $maxContentWidth = Width::Full;
 }

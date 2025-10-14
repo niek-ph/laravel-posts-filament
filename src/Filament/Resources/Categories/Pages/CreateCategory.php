@@ -8,4 +8,5 @@ use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\CategoryResource;
 class CreateCategory extends CreateRecord
 {
     protected static string $resource = CategoryResource::class;
+
 }
