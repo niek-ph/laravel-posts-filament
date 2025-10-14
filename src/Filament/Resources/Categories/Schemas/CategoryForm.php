@@ -64,8 +64,7 @@ class CategoryForm
                     ->disk(config('posts-filament.uploads.disk', 'public'))
                     ->directory(config('posts-filament.uploads.directory'))
                     ->maxSize(config('posts-filament.uploads.file_size'))
-                    ->columnSpanFull()
-                  ,
+                    ->columnSpanFull(),
 
                 KeyValue::make('metadata')
                     ->columnSpanFull(),

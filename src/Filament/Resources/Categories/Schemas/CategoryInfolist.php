@@ -15,7 +15,7 @@ class CategoryInfolist
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
                 TextEntry::make('full_path'),
-                TextEntry::make('url')->url(fn($state) => $state)->color('primary'),
+                TextEntry::make('url')->url(fn ($state) => $state)->color('primary'),
                 TextEntry::make('metadata')
                     ->placeholder('-')
                     ->columnSpanFull(),
