@@ -36,7 +36,7 @@ class PostForm
                             return '';
                         }
 
-                        $fullPath = Str::beforeLast($record->full_path, '/').'/'.$state;
+                        $fullPath = Str::beforeLast($record->getAttribute('full_path'), '/').'/'.$state;
 
                         return Text::make($fullPath)->size('xs');
                     })
