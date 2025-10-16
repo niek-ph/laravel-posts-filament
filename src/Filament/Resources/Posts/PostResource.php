@@ -11,6 +11,8 @@ use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\Pages\CreatePost;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\Pages\EditPost;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\Pages\ListPosts;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\Pages\ViewPost;
+use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\RelationManagers\CommentsRelationManager;
+use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\RelationManagers\TagsRelationManager;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\Schemas\PostForm;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\Schemas\PostInfolist;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\Tables\PostsTable;
@@ -21,6 +23,8 @@ class PostResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::DocumentText;
 
     protected static ?string $recordTitleAttribute = 'title';
+
+    protected static ?int $navigationSort = 0;
 
     public static function getModel(): string
     {
@@ -60,7 +64,8 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CommentsRelationManager::class,
+            TagsRelationManager::class,
         ];
     }
 

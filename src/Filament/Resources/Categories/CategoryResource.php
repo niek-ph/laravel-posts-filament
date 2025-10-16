@@ -13,6 +13,7 @@ use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Pages\ListCategori
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Pages\ViewCategory;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\RelationManagers\PostsRelationManager;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\RelationManagers\SubCategoriesRelationManager;
+use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\RelationManagers\TagsRelationManager;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Schemas\CategoryForm;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Schemas\CategoryInfolist;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Categories\Tables\CategoriesTable;
@@ -22,6 +23,8 @@ class CategoryResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolderOpen;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?int $navigationSort = 1;
 
     public static function getModel(): string
     {
@@ -63,6 +66,7 @@ class CategoryResource extends Resource
         return [
             SubCategoriesRelationManager::class,
             PostsRelationManager::class,
+            TagsRelationManager::class,
         ];
     }
 

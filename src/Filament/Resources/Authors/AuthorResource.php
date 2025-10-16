@@ -23,6 +23,8 @@ class AuthorResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?int $navigationSort = 4;
+
     public static function getModel(): string
     {
         return config('posts.models.author');

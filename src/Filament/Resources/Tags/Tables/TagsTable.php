@@ -17,7 +17,8 @@ class TagsTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->badge(),
                 TextColumn::make('slug')
                     ->searchable()
                     ->sortable()

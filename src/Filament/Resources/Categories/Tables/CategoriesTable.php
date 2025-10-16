@@ -19,12 +19,23 @@ class CategoriesTable
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('description')
                     ->searchable(),
                 ImageColumn::make('featured_image')
                     ->disk(config('posts-filament.uploads.disk', 'public')),
+                TextColumn::make('url')
+                    ->color('primary')
+                    ->url(fn ($state) => $state)
+                    ->searchable()
+                    ->toggleable()
+                    ->sortable(),
+                TextColumn::make('full_path')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -33,7 +44,7 @@ class CategoriesTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('parentCategory.name')
+                TextColumn::make('parent_category.name')
                     ->searchable(),
             ])
             ->filters([

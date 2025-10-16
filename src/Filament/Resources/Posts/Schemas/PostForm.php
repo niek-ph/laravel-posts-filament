@@ -72,11 +72,11 @@ class PostForm
                 KeyValue::make('metadata')
                     ->columnSpanFull(),
 
-                Section::make('SEO')->schema([
-                    TextInput::make('seo_title'),
-                    Textarea::make('seo_description'),
-                ])
-                    ->columnSpanFull(),
+                Section::make('SEO')
+                    ->schema([
+                        TextInput::make('seo_title'),
+                        Textarea::make('seo_description'),
+                    ])->columnSpanFull(),
 
                 Section::make('Excerpt')
                     ->schema([
@@ -100,7 +100,6 @@ class PostForm
                             ->gridContainer()
                             ->columnSpanFull()
                             ->schema([
-
                                 MarkdownEditor::make('body')
                                     ->fileAttachmentsDisk(config('posts-filament.uploads.disk', 'public'))
                                     ->fileAttachmentsDirectory(config('posts-filament.uploads.directory'))
@@ -108,11 +107,13 @@ class PostForm
                                     ->fileAttachmentsMaxSize(config('posts-filament.uploads.file_size'))
                                     ->hiddenLabel()
                                     ->live(debounce: 200),
+
                                 TextEntry::make('body_preview')
                                     ->hiddenLabel()
                                     ->disabled()
                                     ->state(fn (Get $get) => $get('body'))
-                                    ->markdown(),
+                                    ->markdown()
+                                    ->placeholder('-'),
 
                             ]),
                     ])->columnSpanFull(),

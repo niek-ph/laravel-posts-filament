@@ -21,6 +21,8 @@ class CommentResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'id';
 
+    protected static ?int $navigationSort = 3;
+
     public static function getModel(): string
     {
         return config('posts.models.comment');

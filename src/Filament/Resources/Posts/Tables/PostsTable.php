@@ -28,11 +28,17 @@ class PostsTable
                     ->sortable(),
                 TextColumn::make('slug')
                     ->searchable()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('url')
+                    ->color('primary')
+                    ->url(fn ($state) => $state)
+                    ->searchable()
                     ->toggleable()
                     ->sortable(),
                 TextColumn::make('full_path')
                     ->searchable()
-                    ->toggleable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('sort_order')
                     ->numeric()

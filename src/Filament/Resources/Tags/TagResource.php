@@ -21,6 +21,8 @@ class TagResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?int $navigationSort = 2;
+
     public static function getModel(): string
     {
         return config('posts.models.tag');
