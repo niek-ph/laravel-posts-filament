@@ -32,7 +32,7 @@ class PostForm
                 TextInput::make('slug')
                     ->required()
                     ->belowContent(function (?Model $record, $state) {
-                        if (empty($state)) {
+                        if (empty($state) || is_null($record)) {
                             return '';
                         }
 
@@ -117,7 +117,6 @@ class PostForm
 
                             ]),
                     ])->columnSpanFull(),
-
             ]);
     }
 }
