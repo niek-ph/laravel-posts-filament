@@ -14,7 +14,8 @@ class ViewPost extends ViewRecord
 
     protected function getHeaderActions(): array
     {
-        $isPublished = !is_null($this->record->getAttribute('published_at'));
+        $isPublished = ! is_null($this->record->getAttribute('published_at'));
+
         return [
             EditAction::make(),
 
@@ -34,5 +35,4 @@ class ViewPost extends ViewRecord
                 }),
         ];
     }
-
 }
