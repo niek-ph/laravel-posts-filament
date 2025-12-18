@@ -16,7 +16,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
-use NiekPH\LaravelPosts\Models\Category;
+use NiekPH\LaravelPosts\Models\Post;
 use NiekPH\LaravelPostsFilament\Filament\Components\CategorySelector;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Tags\Schemas\TagForm;
 
@@ -38,7 +38,7 @@ class PostForm
                 TextInput::make('slug')
                     ->hidden(fn (string $operation) => $operation !== 'edit')
                     ->required()
-                    ->belowContent(function (?Category $record, $state) {
+                    ->belowContent(function (?Post $record, $state) {
                         if (empty($state)) {
                             return '';
                         }
