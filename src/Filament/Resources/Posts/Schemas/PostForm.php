@@ -28,7 +28,7 @@ class PostForm
             ->components([
                 TextInput::make('title')
                     ->required()
-                    ->afterStateUpdated(function (Set $set, string  $operation, ?string $state){
+                    ->afterStateUpdated(function (Set $set, string $operation, ?string $state) {
                         if ($operation !== 'edit') {
                             return;
                         }

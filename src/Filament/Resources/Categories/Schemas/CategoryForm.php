@@ -25,14 +25,14 @@ class CategoryForm
             ->components([
                 TextInput::make('name')
                     ->required()
-                    ->afterStateUpdated(function (Set $set, string  $operation, ?string $state){
+                    ->afterStateUpdated(function (Set $set, string $operation, ?string $state) {
                         if ($operation !== 'edit') {
                             return;
                         }
                         $set('slug', Str::slug($state));
                     }),
                 TextInput::make('slug')
-                    ->hidden(fn(string  $operation) => $operation !== 'edit')
+                    ->hidden(fn (string $operation) => $operation !== 'edit')
                     ->required()
                     ->belowContent(function (?Category $record, $state) {
                         if (empty($state)) {
