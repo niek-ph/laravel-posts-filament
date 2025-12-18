@@ -43,10 +43,6 @@ class PostForm
                             return '';
                         }
 
-                        if (! $record->parent_category_id) {
-                            return $state;
-                        }
-
                         $fullPath = Str::beforeLast($record->full_path, '/').'/'.$state;
 
                         return Text::make($fullPath)->size('xs');
