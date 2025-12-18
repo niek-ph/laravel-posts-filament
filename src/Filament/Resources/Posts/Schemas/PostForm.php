@@ -11,12 +11,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use NiekPH\LaravelPostsFilament\Filament\Components\CategorySelector;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Tags\Schemas\TagForm;
 
@@ -27,20 +23,7 @@ class PostForm
         return $schema
             ->components([
                 TextInput::make('title')
-                    ->required()
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
-                TextInput::make('slug')
-                    ->required()
-                    ->belowContent(function (?Model $record, $state) {
-                        if (empty($state) || is_null($record)) {
-                            return '';
-                        }
-
-                        $fullPath = Str::beforeLast($record->getAttribute('full_path'), '/').'/'.$state;
-
-                        return Text::make($fullPath)->size('xs');
-                    })
-                    ->live(debounce: 500),
+                    ->required(),
 
                 CategorySelector::make('category_id'),
 

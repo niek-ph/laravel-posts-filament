@@ -9,11 +9,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Text;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
-use Illuminate\Support\Str;
-use NiekPH\LaravelPosts\Models\Category;
 use NiekPH\LaravelPostsFilament\Filament\Components\CategorySelector;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Tags\Schemas\TagForm;
 
@@ -24,24 +20,7 @@ class CategoryForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required()
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
-                TextInput::make('slug')
-                    ->required()
-                    ->belowContent(function (?Category $record, $state) {
-                        if (empty($state)) {
-                            return '';
-                        }
-
-                        if (! $record->parent_category_id) {
-                            return $state;
-                        }
-
-                        $fullPath = Str::beforeLast($record->full_path, '/').'/'.$state;
-
-                        return Text::make($fullPath)->size('xs');
-                    })
-                    ->live(debounce: 500),
+                    ->required(),
 
                 Select::make('tags')
                     ->label('Tags')
