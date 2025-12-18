@@ -36,7 +36,7 @@ class PostForm
                     }),
 
                 TextInput::make('slug')
-                    ->hidden(fn(string  $operation) => $operation !== 'edit')
+                    ->hidden(fn (string $operation) => $operation !== 'edit')
                     ->required()
                     ->belowContent(function (?Category $record, $state) {
                         if (empty($state)) {
