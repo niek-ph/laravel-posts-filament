@@ -10,6 +10,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Text;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 use NiekPH\LaravelPosts\Models\Category;
@@ -23,8 +24,13 @@ class CategoryForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
-//                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->required()
+                    ->afterStateUpdated(function (Set $set, string  $operation, ?string $state){
+                        if ($operation !== 'edit') {
+                            return;
+                        }
+                        $set('slug', Str::slug($state));
+                    }),
                 TextInput::make('slug')
                     ->hidden(fn(string  $operation) => $operation !== 'edit')
                     ->required()
