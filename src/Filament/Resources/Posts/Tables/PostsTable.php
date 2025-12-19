@@ -41,6 +41,7 @@ class PostsTable
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
                 TextColumn::make('sort_order')
+                    ->default(0)
                     ->numeric()
                     ->sortable()
                     ->toggleable(),

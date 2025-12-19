@@ -62,6 +62,7 @@ class CategoryForm
                 CategorySelector::make('parent_category_id'),
 
                 TextInput::make('sort_order')
+                    ->default(0)
                     ->numeric(),
 
                 FileUpload::make('featured_image')
