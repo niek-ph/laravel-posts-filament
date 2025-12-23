@@ -25,9 +25,9 @@ class ViewPost extends ViewRecord
                 ->action(function () use ($isPublished) {
 
                     if ($isPublished) {
-                        $this->record->update(['published_at' => null]);
+                        $this->record->unpublish();
                     } else {
-                        $this->record->update(['published_at' => now()]);
+                        $this->record->publish();
                     }
 
                     Notification::make()->success()->body('Saved!')->send();
