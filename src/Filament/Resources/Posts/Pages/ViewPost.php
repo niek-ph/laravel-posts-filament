@@ -6,6 +6,7 @@ use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ViewRecord;
+use NiekPH\LaravelPosts\Models\Post;
 use NiekPH\LaravelPostsFilament\Filament\Resources\Posts\PostResource;
 
 class ViewPost extends ViewRecord
@@ -23,11 +24,13 @@ class ViewPost extends ViewRecord
                 ->label($isPublished ? 'Make draft' : 'Publish')
                 ->color('primary')
                 ->action(function () use ($isPublished) {
+                    /** @var Post $model */
+                    $model = $this->record;
 
                     if ($isPublished) {
-                        $this->record->unpublish();
+                        $model->unpublish();
                     } else {
-                        $this->record->publish();
+                        $model->publish();
                     }
 
                     Notification::make()->success()->body('Saved!')->send();
